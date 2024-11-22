@@ -1,23 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"; // Penting agar locomotive scroll berfungsi di Next.js 13+
 import React, { useEffect, useRef } from "react";
-import LocomotiveScroll from "locomotive-scroll";
+
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
 export default function LocomotiveScrollPage() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (scrollContainerRef.current) {
-      const locomotiveScroll = new LocomotiveScroll({
-        el: scrollContainerRef.current,
-        smooth: true, // Aktifkan efek scroll yang halus
-        multiplier: 1.2, // Kecepatan scroll
-      });
+    let locomotiveScroll: any;
 
-      // Cleanup locomotive scroll saat komponen di-unmount
-      return () => {
-        locomotiveScroll.destroy();
-      };
+    if (scrollContainerRef.current) {
+      // Import LocomotiveScroll hanya di sisi klien
+      import("locomotive-scroll").then((LocomotiveScroll) => {
+        locomotiveScroll = new LocomotiveScroll.default({
+          el: scrollContainerRef.current as HTMLElement,
+          smooth: true,
+          multiplier: 1,
+        });
+      });
     }
+
+    // Cleanup instance saat komponen dilepas
+    return () => {
+      if (locomotiveScroll) locomotiveScroll.destroy();
+    };
   }, []);
 
   return (
