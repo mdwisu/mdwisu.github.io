@@ -1,99 +1,96 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io";
+import Navbar from "@/components/Navbar";
+import MainPage from "./main/page";
+import ProjectPage from "./projects/page";
+import AboutPage from "./about/page";
+import { useEffect, useRef } from "react";
+import ConstructionModal from "@/components/ContructionModal";
 
-const projects = [
-  { title: "HRIS System", description: "A web-based HR management solution." },
-  {
-    title: "Shiny App",
-    description: "Data visualization for academic research.",
-  },
-  // Tambahkan proyek lainnya di sini
-];
+// Pindahkan import dan inisialisasi Locomotive ke dalam useEffect
+declare global {
+  interface Window {
+    locomotive?: any; // Tambahkan ? untuk menandai sebagai opsional
+  }
+}
 
 export default function Home() {
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const locomotiveScrollRef = useRef<any>(null);
+
+  useEffect(() => {
+    // Import Locomotive Scroll hanya di client side
+    const initLocomotiveScroll = async () => {
+      const locomotiveModule = await import("locomotive-scroll");
+      const LocomotiveScroll = locomotiveModule.default;
+
+      if (scrollContainerRef.current && !locomotiveScrollRef.current) {
+        locomotiveScrollRef.current = new LocomotiveScroll({
+          el: scrollContainerRef.current,
+          smooth: true,
+          multiplier: 1,
+          lerp: 0.07,
+          smartphone: {
+            smooth: true,
+          },
+          tablet: {
+            smooth: true,
+            breakpoint: 1024,
+          },
+        });
+
+        // Assign ke window untuk progress bar jika diperlukan
+        window.locomotive = locomotiveScrollRef.current;
+      }
+    };
+
+    // Inisialisasi hanya di client side
+    if (typeof window !== "undefined") {
+      initLocomotiveScroll();
+    }
+
+    return () => {
+      if (locomotiveScrollRef.current) {
+        locomotiveScrollRef.current.destroy();
+        locomotiveScrollRef.current = null;
+        delete window.locomotive;
+      }
+    };
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    if (locomotiveScrollRef.current) {
+      const target = document.getElementById(id);
+      if (target) {
+        locomotiveScrollRef.current.scrollTo(target, {
+          offset: 0,
+          duration: 1000,
+          easing: [0.25, 0.0, 0.35, 1.0],
+        });
+      }
+    }
+  };
+
   return (
-    <>
-      {/* Floating Items */}
-      <div className="fixed bottom-10 right-10 flex flex-col space-y-4">
-        <a
-          href="https://linkedin.com/in/username" // Ganti dengan link LinkedIn Anda
-          target="_blank"
-          rel="noopener noreferrer"
-          className=" text-white rounded-full p-3 shadow-lg hover:bg-blue-600 hover:text-white transition duration-300"
-        >
-          <IoLogoLinkedin size={24} />
-        </a>
-        <a
-          href="https://github.com/username" // Ganti dengan link GitHub Anda
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-gray-800 text-white rounded-full p-3 shadow-lg hover:bg-gray-900 transition"
-        >
-          <IoLogoGithub size={24} />
-        </a>
+    <div>
+      <ConstructionModal />
+      <div data-scroll-container ref={scrollContainerRef}>
+        <div data-scroll-section>
+          <Navbar scrollToSection={scrollToSection} />
+          <MainPage />
+        </div>
+        <div data-scroll-section id="projects">
+          <ProjectPage />
+        </div>
+        <div data-scroll-section id="about">
+          <AboutPage />
+        </div>
+        <div>
+          <section data-scroll-section id="contact" className="min-h-screen">
+            contact
+          </section>
+        </div>
       </div>
-      <nav className="px-16 py-10 bg-gray-800 text-white flex justify-between items-center space-x-4">
-        <div>
-          <span className="font-bold text-6xl">Santo</span>
-        </div>
-        <div className="flex space-x-4">
-          <Link href="#projects">Projects</Link>
-          <Link href="#about">About</Link>
-          <Link href="#contact">Contact</Link>
-        </div>
-        <div>
-          {/* link to linkedin */}
-          <Link href="https://www.linkedin.com/in/muhammad-dwi-susanto-684298201/">
-            Resume
-          </Link>
-        </div>
-        {/* button resume */}
-      </nav>
-      <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <h1 className="text-4xl font-bold text-gray-800">
-            Hi, I&apos;m Muhammad Dwi Susanto!
-          </h1>
-          <p className="mt-4 text-lg text-gray-600">
-            A full-stack developer passionate about creating web solutions.
-          </p>
-        </motion.div>
-      </main>
-      {/* projects */}
-      <section className="p-10 text-center bg-white">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-6">Projects</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="p-6 bg-gray-100 rounded-lg shadow-md"
-            >
-              <h2 className="text-2xl font-bold text-gray-700">
-                {project.title}
-              </h2>
-              <p className="text-gray-600">{project.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-      {/* about */}
-      <section className="p-10 text-center bg-white">
-        <h1 className="text-3xl font-semibold text-gray-800">About Me</h1>
-        <p className="mt-4 text-lg text-gray-600">
-          I am a recent Information Systems graduate from Bogor, Indonesia,
-          specializing in full-stack development.
-        </p>
-      </section>
-    </>
+    </div>
   );
 }

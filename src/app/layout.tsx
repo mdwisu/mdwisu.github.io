@@ -1,6 +1,10 @@
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { CursorProvider } from "@/components/cursor/CursorContext";
+import { CustomCursor } from "@/components/cursor/CustomCursor";
+import "./locomotive-scroll.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CursorProvider>
+          <CustomCursor />
+          {children}
+        </CursorProvider>
       </body>
     </html>
   );

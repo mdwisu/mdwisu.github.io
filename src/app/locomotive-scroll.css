@@ -1,0 +1,9 @@
+@import "~locomotive-scroll/dist/locomotive-scroll.css";
+
+[data-scroll-container] {
+  overflow: hidden;
+}
+
+[data-scroll-section] {
+  position: relative;
+}
