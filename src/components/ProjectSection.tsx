@@ -54,7 +54,6 @@ export default function ProjectSection() {
             initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }} // Animasi dimulai dari kiri atau kanan
             whileInView={{ opacity: 1, x: 0 }} // Animasi bergerak ke tengah
             transition={{ duration: 0.6, delay: index * 0.2 }}
-            viewport={{ once: true }} // Hanya animasi pertama kali terlihat
             className="relative p-4 bg-gray-100 rounded-lg shadow-md overflow-hidden"
           >
             {/* Screenshot Layer */}
