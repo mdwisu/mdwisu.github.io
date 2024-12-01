@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Navbar from "@/components/Navbar";
-import MainPage from "./main/page";
-import ProjectPage from "./projects/page";
-import AboutPage from "./about/page";
 import { useEffect, useRef } from "react";
 import ConstructionModal from "@/components/ContructionModal";
+import AboutSection from "@/components/AboutSection";
+import MainSection from "@/components/MainSection";
+import ProjectSection from "@/components/ProjectSection";
+import ContactSection from "@/components/ContactSection";
 
 // Pindahkan import dan inisialisasi Locomotive ke dalam useEffect
 declare global {
@@ -77,18 +78,16 @@ export default function Home() {
       <div data-scroll-container ref={scrollContainerRef}>
         <div data-scroll-section>
           <Navbar scrollToSection={scrollToSection} />
-          <MainPage />
+          <MainSection />
         </div>
         <div data-scroll-section id="projects">
-          <ProjectPage />
+          <ProjectSection />
         </div>
         <div data-scroll-section id="about">
-          <AboutPage />
+          <AboutSection />
         </div>
-        <div>
-          <section data-scroll-section id="contact" className="min-h-screen">
-            contact
-          </section>
+        <div data-scroll-section id="contact">
+          <ContactSection />
         </div>
       </div>
     </div>

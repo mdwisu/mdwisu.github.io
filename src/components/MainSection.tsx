@@ -1,18 +1,18 @@
 "use client";
-import { useCursor } from "@/components/cursor/CursorContext";
+// import { useCursor } from "@/components/cursor/CursorContext";
 import React from "react";
 import { motion } from "framer-motion";
 import Magnet from "@/components/Magnet";
 
-export default function MainPage() {
-  const { setCursorType } = useCursor();
+export default function MainSection() {
+  // const { setCursorType } = useCursor();
   return (
     <div className="min-h-screen bg-gray-800">
       <Magnet strength={50}>
         {
           <main
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("default")}
+            // onMouseEnter={() => setCursorType("hover")}
+            // onMouseLeave={() => setCursorType("default")}
             className="flex flex-col items-center justify-center min-h-screen"
           >
             <motion.div
