@@ -2,7 +2,7 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import { useEffect, useRef } from "react";
-import ConstructionModal from "@/components/ContructionModal";
+// import ConstructionModal from "@/components/ContructionModal";
 import AboutSection from "@/components/AboutSection";
 import MainSection from "@/components/MainSection";
 import ProjectSection from "@/components/ProjectSection";
