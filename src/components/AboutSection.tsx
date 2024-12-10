@@ -45,7 +45,7 @@ export default function AboutSection() {
     <section className="bg-white min-h-screen">
       <section
         data-scroll
-        data-scroll-speed="8"
+        data-scroll-speed="4"
         className="p-10 text-center min-h-screen"
       >
         {/* Judul Section */}

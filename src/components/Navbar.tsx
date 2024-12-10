@@ -70,7 +70,7 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
       {/* Social Links */}
       <div className="hidden md:flex space-x-4">
         <a
-          href="https://linkedin.com/in/username"
+          href="https://www.linkedin.com/in/muhammad-dwi-susanto-684298201/"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-gray-300 transition"
@@ -78,7 +78,7 @@ export default function Navbar({ scrollToSection }: NavbarProps) {
           <IoLogoLinkedin size={24} />
         </a>
         <a
-          href="https://github.com/username"
+          href="https://github.com/mdwisu"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-gray-300 transition"
