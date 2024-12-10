@@ -74,7 +74,7 @@ export default function Home() {
 
   return (
     <div>
-      <ConstructionModal />
+      {/* <ConstructionModal /> */}
       <div data-scroll-container ref={scrollContainerRef}>
         <div data-scroll-section>
           <Navbar scrollToSection={scrollToSection} />
