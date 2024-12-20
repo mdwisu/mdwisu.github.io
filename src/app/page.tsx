@@ -7,6 +7,7 @@ import AboutSection from "@/components/AboutSection";
 import MainSection from "@/components/MainSection";
 import ProjectSection from "@/components/ProjectSection";
 import ContactSection from "@/components/ContactSection";
+import LearningProjectSection from "../components/LearningProjectSection";
 
 // Pindahkan import dan inisialisasi Locomotive ke dalam useEffect
 declare global {
@@ -82,6 +83,9 @@ export default function Home() {
         </div>
         <div data-scroll-section id="projects">
           <ProjectSection />
+        </div>
+        <div data-scroll-section id="learning-projects">
+          <LearningProjectSection />
         </div>
         <div data-scroll-section id="about">
           <AboutSection />

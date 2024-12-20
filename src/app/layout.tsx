@@ -4,6 +4,8 @@ import "./globals.css";
 // import { CursorProvider } from "@/components/cursor/CursorContext";
 // import { CustomCursor } from "@/components/cursor/CustomCursor";
 import "./locomotive-scroll.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
