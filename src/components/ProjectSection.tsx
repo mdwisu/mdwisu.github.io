@@ -29,11 +29,18 @@ const projects = [
     link: "https://github.com/Skilvul-FEBE-3/FinalProject-BE",
   },
   {
+    title: "MeWell BackEnd API",
+    description: "Project API MeWell",
+    techStack: ["Express Js", "Mongoose", "MongoDB", "Tailwind"],
+    screenshot: "images/me-well.png", // Ganti dengan path gambar yang benar
+    link: "https://github.com/febrilasucia/MeWell-BackEnd",
+  },
+  {
     title: "HRIS System API",
     description: "A web-based HR management solution.",
     techStack: ["Nest Js", "TypeOrm", "Tailwind CSS"],
     screenshot: "/ss.png", // Ganti dengan path gambar yang benar
-    link: "",
+    link: "https://github.com/mdwisu/hris-app-api",
   },
   // Tambahkan proyek lainnya di sini
 ];
@@ -43,9 +50,16 @@ export default function ProjectSection() {
   const router = useRouter();
 
   // Open modal with selected project
-  const openModal = (project: any) => {
-    setSelectedProject(project);
-    router.push(`?modal=${project.title}`);
+  // const openModal = (project: any) => {
+  //   setSelectedProject(project);
+  //   router.push(`?modal=${project.title}`);
+  // };
+  const openLink = (link: string) => {
+    if (link) {
+      window.open(link, "_blank"); // Buka link di tab baru
+    } else {
+      alert("Link tidak tersedia");
+    }
   };
 
   // Close modal and go back to projects list
@@ -69,7 +83,8 @@ export default function ProjectSection() {
               transition: { duration: 0.2 }, // Instant tap effect
             }}
             onHoverStart={() => console.log("hover started!")}
-            onClick={() => openModal(project)}
+            // onClick={() => openModal(project)}
+            onClick={() => openLink(project.link)}
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
