@@ -59,7 +59,7 @@ export default function LearningProjectSection() {
           to explore!
         </p>
 
-        <Slider {...sliderSettings}>
+        <Slider {...sliderSettings} className="mx-8">
           {projectsData.map((project, index) => (
             <div key={index} className="p-4">
               <div className="bg-gray-800 p-6 rounded-md shadow-md hover:shadow-lg transition-shadow">
